@@ -1,24 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
+import { AuthProvider } from "./contexts/auth";
+import PrivateRoute from "./components/PrivateRoute";
+import LoginPage from "./pages/Login";
+import NotesPage from "./pages/Notes";
+import PrivacyPage from "./pages/Privacy";
+import TermsPage from "./pages/Terms";
+import Page404 from "./pages/404";
+import "./App.css";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AuthProvider>
+      <Router>
+        <Switch>
+          <Route path="/" exact>
+            <Redirect to="/notes" />
+          </Route>
+          <Route path="/login" exact>
+            <LoginPage />
+          </Route>
+          <Route path="/privacy" exact>
+            <PrivacyPage />
+          </Route>
+          <Route path="/terms" exact>
+            <TermsPage />
+          </Route>
+          <PrivateRoute path="/notes" exact>
+            <NotesPage />
+          </PrivateRoute>
+          <Route path="*">
+            <Page404 />
+          </Route>
+        </Switch>
+      </Router>
+    </AuthProvider>
   );
 }
 
