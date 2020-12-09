@@ -8,11 +8,13 @@ const { REACT_APP_GOOGLE_OAUTH_CLIENT_ID } = process.env;
 function LoginButton(props) {
   const history = useHistory();
   const location = useLocation();
+
   function reportError({ details }) {
     const msg = `Login/logout failed: ${details}`;
     alert(msg);
     console.error(msg);
   }
+
   function onLogin() {
     let { from } = location.state || { from: { pathname: "/" } };
     history.replace(from);
