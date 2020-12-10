@@ -8,7 +8,7 @@ function NotesList({ notes, onDelete }) {
           <h2>{note.name}</h2>
           <span>{note.insertedAt}</span>
           <span>{note.description}</span>
-          <button onClick={() => onDelete(notes.id)}>Delete</button>
+          <button onClick={() => onDelete(note.id)}>Delete</button>
         </li>
       ))}
     </ul>

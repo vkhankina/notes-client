@@ -8,15 +8,17 @@ function Notes() {
   const notify = useContext(NotificationsContext);
 
   const fetchNotes = () => {
-    notesService("notes")
-      .then((response) => setNotes(response.data))
+    notesService("notes/")
+      .then((response) => setNotes(response.data.data))
       .catch(() => notify.error("Failed to fetch notes from server!"));
   };
   const onDelete = (id) => {
-    notesService(`notes/${id}`, "delete").then(fetchNotes);
+    notesService(`notes/${id}/`, "delete")
+      .then(fetchNotes)
+      .catch(() => notify.error("Failed to delete note!"));
   };
   const onAdd = (note) => {
-    notesService("notes", "post", { data: note }).then(fetchNotes);
+    notesService("notes/", "post", { data: note }).then(fetchNotes);
   };
 
   useEffect(fetchNotes, []);
