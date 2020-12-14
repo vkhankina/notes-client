@@ -5,6 +5,7 @@ import NotesList from "./List";
 import NotificationsContext from "../../contexts/notifications";
 import AddButton from "../buttons/AddButton";
 import NotesForm from "./Form";
+import RemoveAccountButton from "./RemoveAccountButton";
 
 const noOp = () => {};
 
@@ -50,6 +51,7 @@ function Notes() {
 
   return (
     <>
+      <RemoveAccountButton />
       <AddButton renderForm={renderForm} />
       <NotesList notes={notes} onDelete={onDelete} />
     </>

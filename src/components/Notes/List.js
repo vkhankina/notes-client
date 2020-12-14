@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import RemoveButton from "../buttons/RemoveButton";
 
 function NotesList({ notes, onDelete }) {
   return (
@@ -8,7 +9,7 @@ function NotesList({ notes, onDelete }) {
           <h2>{note.name}</h2>
           <span>{note.insertedAt}</span>
           <span>{note.description}</span>
-          <button onClick={() => onDelete(note.id)}>Delete</button>
+          <RemoveButton onOk={() => onDelete(note.id)} />
         </li>
       ))}
     </ul>
