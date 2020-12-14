@@ -1,7 +1,7 @@
 import { GoogleLogin, GoogleLogout } from "react-google-login";
 import { useHistory, useLocation } from "react-router-dom";
 
-import AuthContext from "../contexts/auth";
+import AuthContext from "../../contexts/auth";
 
 const { REACT_APP_GOOGLE_OAUTH_CLIENT_ID } = process.env;
 
@@ -37,7 +37,8 @@ function LoginButton(props) {
         return (
           <GoogleLogin
             clientId={REACT_APP_GOOGLE_OAUTH_CLIENT_ID}
-            onSuccess={({ profileObj: profile, tokenObj: token }) => {
+            onSuccess={(response) => {
+              const { profileObj: profile, tokenObj: token } = response;
               setUser({ profile, token }, onLogin);
             }}
             onFailure={reportError}

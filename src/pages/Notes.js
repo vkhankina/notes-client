@@ -3,7 +3,7 @@ import Notes from "../components/Notes";
 
 function NotesPage() {
   return (
-    <BasicPage>
+    <BasicPage title="Notes">
       <Notes />
     </BasicPage>
   );

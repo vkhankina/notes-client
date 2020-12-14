@@ -1,5 +1,5 @@
 import logo from "../logo.png";
-import LoginButton from "../components/LoginButton";
+import LoginButton from "../components/buttons/LoginButton";
 
 function LoginPage() {
   return (

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import logo from "../../logo.png";
-import LoginButton from "../LoginButton";
+import LoginButton from "../buttons/LoginButton";
 
 export default function Header() {
   return (

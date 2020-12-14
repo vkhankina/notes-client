@@ -12,8 +12,8 @@ const makeAuthorizationString = () => {
     throw new Error("Login first to make this request!");
   }
 
-  const { token_type, access_token } = user.token;
-  return `${token_type} ${access_token}`;
+  const { id_token } = user.token;
+  return id_token;
 };
 
 const defaultConfig = () => ({

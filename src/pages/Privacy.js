@@ -1,7 +1,7 @@
 import BasicPage from "../components/BasicPage";
 
 function PrivacyPage() {
-  return <BasicPage>Privacy</BasicPage>;
+  return <BasicPage title="Privacy" />;
 }
 
 export default PrivacyPage;

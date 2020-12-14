@@ -1,7 +1,7 @@
 import BasicPage from "../components/BasicPage";
 
 function TermsPage() {
-  return <BasicPage>Terms</BasicPage>;
+  return <BasicPage title="Terms" />;
 }
 
 export default TermsPage;
