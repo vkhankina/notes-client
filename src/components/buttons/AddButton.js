@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Button from "react-bootstrap/Button";
 import PropTypes from "prop-types";
 
 function AddButton({ renderForm, btnText }) {
@@ -6,7 +7,7 @@ function AddButton({ renderForm, btnText }) {
   const toggle = () => setOpen(!open);
 
   if (!open) {
-    return <button onClick={toggle}>{btnText}</button>;
+    return <Button onClick={toggle}>{btnText}</Button>;
   }
 
   return renderForm({ onClose: toggle });

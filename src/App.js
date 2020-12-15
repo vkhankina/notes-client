@@ -12,7 +12,7 @@ import NotesPage from "./pages/Notes";
 import PrivacyPage from "./pages/Privacy";
 import TermsPage from "./pages/Terms";
 import Page404 from "./pages/404";
-import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (

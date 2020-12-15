@@ -1,18 +1,25 @@
 import PropTypes from "prop-types";
+import Card from "react-bootstrap/Card";
 import RemoveButton from "../buttons/RemoveButton";
 
 function NotesList({ notes, onDelete }) {
   return (
-    <ul>
-      {notes.map((note) => (
-        <li key={note.id}>
-          <h2>{note.name}</h2>
-          <span>{note.insertedAt}</span>
-          <span>{note.description}</span>
-          <RemoveButton onOk={() => onDelete(note.id)} />
-        </li>
-      ))}
-    </ul>
+    <div>
+      {notes.map((note) => {
+        const date = new Date(note.insertedAt);
+
+        return (
+          <Card key={note.id}>
+            <Card.Body>
+              <Card.Title>{note.name}</Card.Title>
+              <Card.Subtitle>{date.toLocaleString()}</Card.Subtitle>
+              <Card.Text>{note.description}</Card.Text>
+              <RemoveButton variant="danger" onOk={() => onDelete(note.id)} />
+            </Card.Body>
+          </Card>
+        );
+      })}
+    </div>
   );
 }
 

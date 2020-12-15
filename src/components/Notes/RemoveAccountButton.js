@@ -13,7 +13,11 @@ function RemoveAccountButton() {
       .catch(() => notify.error("Failed to delete account!"));
   };
   return (
-    <RemoveButton onOk={onOk} message="Are you sure to delete your account?">
+    <RemoveButton
+      variant="danger"
+      onOk={onOk}
+      message="Are you sure to delete your account?"
+    >
       Delete My Account
     </RemoveButton>
   );

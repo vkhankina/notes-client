@@ -9,7 +9,7 @@ const { REACT_APP_NOTES_SERVICE_URL } = process.env;
 const makeAuthorizationString = () => {
   const user = AuthStorage.getUser();
   if (!user) {
-    throw new Error("Login first to make this request!");
+    window.location.pathname = "/login";
   }
 
   const { id_token } = user.token;

@@ -11,7 +11,6 @@ const noOp = () => {};
 
 function Notes() {
   const [notes, setNotes] = useState([]);
-  const [validation, setValidation] = useState({});
   const notify = useContext(NotificationsContext);
 
   const fetchNotes = () => {
@@ -33,17 +32,15 @@ function Notes() {
       .catch(({ response }) => {
         notify.error("Failed to add note!");
         if (response.status === 422) {
-          setValidation(_.get(response, "data.error", {}));
+          onError(_.get(response, "data.error", {}));
         }
-        onError();
       });
   };
 
   const renderForm = ({ onClose }) => (
     <NotesForm
-      onSubmit={(note) => onAdd(note, onClose)}
+      onSubmit={(note, onError) => onAdd(note, onClose, onError)}
       onClose={onClose}
-      errors={validation}
     />
   );
 

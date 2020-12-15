@@ -1,7 +1,11 @@
+import { useState } from "react";
 import PropTypes from "prop-types";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 import BasicInput from "../form/BasicInput";
 
-function NotesForm({ errors, onSubmit, onClose }) {
+function NotesForm({ onSubmit, onClose }) {
+  const [errors, setErrors] = useState({});
   const handleSubmit = (event) => {
     event.preventDefault();
     const elements = event.target.elements;
@@ -12,11 +16,11 @@ function NotesForm({ errors, onSubmit, onClose }) {
         data[item.name] = item.value;
       }
     }
-    onSubmit(data);
+    onSubmit(data, setErrors);
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit} onReset={() => setErrors({})}>
       <BasicInput
         name="name"
         label="Name"
@@ -30,32 +34,23 @@ function NotesForm({ errors, onSubmit, onClose }) {
         error={errors.description}
         required
         placeholder="Some text..."
-        render={(props) => <textarea {...props} />}
+        as="textarea"
       />
-      <input type="submit" />
-      <input type="reset" />
-      <button onClick={onClose}>Close</button>
-    </form>
+      <Button onClick={onClose}>Close</Button>
+      <Button type="reset">Reset</Button>
+      <Button type="submit" variant="success">
+        Submit
+      </Button>
+    </Form>
   );
 }
 
 NotesForm.propTypes = {
-  errors: PropTypes.shape({
-    name: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.arrayOf(PropTypes.string),
-    ]),
-    description: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.arrayOf(PropTypes.string),
-    ]),
-  }),
   onSubmit: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
 };
 
 NotesForm.defaultProps = {
-  errors: {},
   onClose: () => {},
 };
 

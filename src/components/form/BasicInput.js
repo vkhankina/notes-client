@@ -1,18 +1,20 @@
 import PropTypes from "prop-types";
+import Form from "react-bootstrap/Form";
 
-function BasicInput({ label, name, error, render, required, ...rest }) {
+function BasicInput({ label, name, error, required, ...rest }) {
   return (
-    <span>
-      <label htmlFor={name} className={`label ${required ? "required" : ""}`}>
-        {label}
-        {render ? (
-          render({ name, required, ...rest })
-        ) : (
-          <input name={name} required={required} {...rest} />
-        )}
-      </label>
-      <span className={`validation ${error ? "error" : ""}`}>{error}</span>
-    </span>
+    <Form.Group controlId={name}>
+      <Form.Label className={required ? "required" : ""}>{label}</Form.Label>
+      <Form.Control
+        isInvalid={!!error}
+        name={name}
+        required={required}
+        {...rest}
+      />
+      <Form.Control.Feedback type={error ? "invalid" : "valid"}>
+        {error}
+      </Form.Control.Feedback>
+    </Form.Group>
   );
 }
 
@@ -23,13 +25,11 @@ BasicInput.propTypes = {
     PropTypes.string,
     PropTypes.arrayOf(PropTypes.string),
   ]),
-  render: PropTypes.func,
   required: PropTypes.bool,
 };
 
 BasicInput.defaultProps = {
   error: null,
-  render: null,
   required: false,
 };
 

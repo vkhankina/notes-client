@@ -1,19 +1,39 @@
+import { useState } from "react";
 import PropTypes from "prop-types";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
 
 function RemoveButton({ message, onOk, onCancel, onClick, children, ...rest }) {
-  const handleClick = () => {
-    const flag = window.confirm(message);
-    if (flag) {
-      onOk();
-    } else {
-      onCancel();
-    }
+  const [open, setOpen] = useState(false);
+  const toggle = () => setOpen(!open);
+
+  const handleCancel = () => {
+    toggle();
+    onCancel();
+  };
+
+  const handleOk = () => {
+    toggle();
+    onOk();
   };
 
   return (
-    <button onClick={handleClick} {...rest}>
-      {children}
-    </button>
+    <>
+      <Button onClick={toggle} {...rest}>
+        {children}
+      </Button>
+      <Modal show={open}>
+        <Modal.Body>{message}</Modal.Body>
+        <Modal.Footer>
+          <Button variant="danger" onClick={handleOk}>
+            Delete
+          </Button>
+          <Button variant="primary" onClick={handleCancel}>
+            Cancel
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
   );
 }
 

@@ -1,5 +1,8 @@
 import { GoogleLogin, GoogleLogout } from "react-google-login";
 import { useHistory, useLocation } from "react-router-dom";
+import Button from "react-bootstrap/Button";
+import { GrGoogle } from "react-icons/gr";
+import _ from "lodash";
 
 import AuthContext from "../../contexts/auth";
 
@@ -29,6 +32,11 @@ function LoginButton(props) {
               clientId={REACT_APP_GOOGLE_OAUTH_CLIENT_ID}
               onLogoutSuccess={() => setUser(null)}
               onFailure={reportError}
+              render={(props) => (
+                <Button {...props}>
+                  <GrGoogle /> Logout {_.get(user, "profile.email")}
+                </Button>
+              )}
               {...props}
             />
           );
@@ -42,6 +50,11 @@ function LoginButton(props) {
               setUser({ profile, token }, onLogin);
             }}
             onFailure={reportError}
+            render={(props) => (
+              <Button {...props}>
+                <GrGoogle /> Login via Google
+              </Button>
+            )}
             {...props}
           />
         );
